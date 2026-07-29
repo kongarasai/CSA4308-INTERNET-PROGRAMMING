@@ -1,0 +1,2388 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hotel Room Booking System</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: #1d3557;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+/* NAVIGATION */
+nav {
+    background: #0d1b2a;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+nav button {
+    background: #457b9d;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #e63946;
+}
+
+/* CONTAINER */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 25px auto;
+}
+
+/* SECTIONS */
+.section {
+    display: none;
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.active {
+    display: block;
+}
+
+h2 {
+    color: #1d3557;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #1d3557;
+    margin: 10px 0;
+}
+
+/* INPUTS */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* BUTTONS */
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    background: #457b9d;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.danger {
+    background: #e63946;
+}
+
+.success {
+    background: #2a9d8f;
+}
+
+.warning {
+    background: #f4a261;
+}
+
+.disabled {
+    background: #777;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero h2 {
+    font-size: 32px;
+}
+
+/* SEARCH */
+.search-box {
+    background: #eef3f7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* CARDS */
+.card-container {
+    display: grid;
+    grid-template-columns:
+    repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #fafafa;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.card p {
+    margin: 8px 0;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #1d3557;
+    color: white;
+}
+
+/* MESSAGE */
+.message {
+    padding: 12px;
+    background: #eaf4f4;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* FOOTER */
+footer {
+    background: #0d1b2a;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px) {
+
+    .container {
+        width: 95%;
+    }
+
+    table {
+        font-size: 11px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🏨 GrandStay Hotel</h1>
+
+<p>
+Online Hotel Room Booking System
+</p>
+
+</header>
+
+
+<nav>
+
+<button onclick="showSection('home')">
+Home
+</button>
+
+<button onclick="showSection('rooms')">
+Rooms
+</button>
+
+<button onclick="showSection('availability')">
+Availability
+</button>
+
+<button onclick="showSection('register')">
+Register
+</button>
+
+<button onclick="showSection('login')">
+Login
+</button>
+
+<button onclick="showSection('profile')">
+My Profile
+</button>
+
+<button onclick="showSection('bookings')">
+My Bookings
+</button>
+
+<button onclick="showSection('adminLogin')">
+Admin
+</button>
+
+<button onclick="showSection('about')">
+About Us
+</button>
+
+<button onclick="showSection('contact')">
+Contact
+</button>
+
+<button onclick="showSection('faq')">
+FAQ
+</button>
+
+<button onclick="showSection('travel')">
+Travel Guide
+</button>
+
+<button onclick="showSection('privacy')">
+Privacy
+</button>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- HOME -->
+
+<div id="home" class="section active">
+
+<div class="hero">
+
+<h2>
+Find Your Perfect Stay
+</h2>
+
+<p>
+Search, check availability and book
+your hotel room easily.
+</p>
+
+</div>
+
+
+<div class="search-box">
+
+<h3>
+Search Available Rooms
+</h3>
+
+<label>
+Check-in Date
+</label>
+
+<input
+type="date"
+id="searchCheckIn"
+>
+
+
+<label>
+Check-out Date
+</label>
+
+<input
+type="date"
+id="searchCheckOut"
+>
+
+
+<label>
+Number of Guests
+</label>
+
+<input
+type="number"
+id="searchGuests"
+min="1"
+value="1"
+>
+
+
+<button onclick="searchAvailableRooms()">
+Search Rooms
+</button>
+
+</div>
+
+
+<div id="searchResults"
+class="card-container">
+</div>
+
+</div>
+
+
+<!-- ROOMS -->
+
+<div id="rooms" class="section">
+
+<h2>
+Room Types
+</h2>
+
+<div
+id="roomList"
+class="card-container">
+</div>
+
+</div>
+
+
+<!-- AVAILABILITY -->
+
+<div id="availability" class="section">
+
+<h2>
+Check Room Availability
+</h2>
+
+<input
+type="date"
+id="availabilityCheckIn"
+>
+
+<input
+type="date"
+id="availabilityCheckOut"
+>
+
+<button onclick="checkAvailability()">
+Check Availability
+</button>
+
+<div
+id="availabilityResult"
+class="card-container">
+</div>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div id="register" class="section">
+
+<h2>
+User Registration
+</h2>
+
+<input
+type="text"
+id="registerName"
+placeholder="Full Name"
+>
+
+<input
+type="email"
+id="registerEmail"
+placeholder="Email"
+>
+
+<input
+type="password"
+id="registerPassword"
+placeholder="Password"
+>
+
+<button onclick="registerUser()">
+Register
+</button>
+
+<div
+id="registerMessage"
+class="message">
+</div>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="login" class="section">
+
+<h2>
+User Login
+</h2>
+
+<input
+type="email"
+id="loginEmail"
+placeholder="Email"
+>
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+>
+
+<button onclick="userLogin()">
+Login
+</button>
+
+<div
+id="loginMessage"
+class="message">
+</div>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div id="profile" class="section">
+
+<h2>
+My Profile
+</h2>
+
+<div id="profileContent">
+Please login first.
+</div>
+
+</div>
+
+
+<!-- BOOKING FORM -->
+
+<div id="bookingForm" class="section">
+
+<h2>
+Book Room
+</h2>
+
+<h3 id="selectedRoom">
+</h3>
+
+<input
+type="date"
+id="bookingCheckIn"
+>
+
+<input
+type="date"
+id="bookingCheckOut"
+>
+
+<input
+type="number"
+id="bookingGuests"
+placeholder="Number of Guests"
+min="1"
+>
+
+<input
+type="text"
+id="guestName"
+placeholder="Guest Name"
+>
+
+<input
+type="text"
+id="guestPhone"
+placeholder="Phone Number"
+>
+
+<button onclick="confirmBooking()">
+Confirm Booking
+</button>
+
+<div
+id="bookingMessage"
+class="message">
+</div>
+
+</div>
+
+
+<!-- MY BOOKINGS -->
+
+<div id="bookings" class="section">
+
+<h2>
+My Booking History
+</h2>
+
+<div id="userBookings">
+Please login first.
+</div>
+
+</div>
+
+
+<!-- ADMIN LOGIN -->
+
+<div id="adminLogin" class="section">
+
+<h2>
+Administrator Login
+</h2>
+
+<input
+type="text"
+id="adminUsername"
+placeholder="Username"
+>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Password"
+>
+
+<button onclick="adminLogin()">
+Login
+</button>
+
+<div
+id="adminLoginMessage"
+class="message">
+</div>
+
+</div>
+
+
+<!-- ADMIN DASHBOARD -->
+
+<div id="adminDashboard" class="section">
+
+<h2>
+Administrator Dashboard
+</h2>
+
+
+<h3>
+Manage Room Quantity and Price
+</h3>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Room Type
+</th>
+
+<th>
+Quantity
+</th>
+
+<th>
+Price
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="adminRoomList">
+</tbody>
+
+</table>
+
+
+<h3>
+Manage Bookings
+</h3>
+
+<div id="adminBookings">
+</div>
+
+
+<h3>
+Update Static Website Content
+</h3>
+
+<select id="contentType">
+
+<option value="about">
+About Us
+</option>
+
+<option value="contact">
+Contact Us
+</option>
+
+<option value="faq">
+Customer Service FAQ
+</option>
+
+<option value="travel">
+Local Travel Guide
+</option>
+
+<option value="privacy">
+Privacy Policy
+</option>
+
+</select>
+
+<textarea
+id="contentText"
+rows="6"
+placeholder="Enter new content">
+</textarea>
+
+<button onclick="updateContent()">
+Update Content
+</button>
+
+</div>
+
+
+<!-- ABOUT -->
+
+<div id="about" class="section">
+
+<h2>
+About Us
+</h2>
+
+<p id="aboutText">
+
+GrandStay Hotel provides comfortable
+and affordable accommodation for
+business and leisure travelers.
+
+</p>
+
+</div>
+
+
+<!-- CONTACT -->
+
+<div id="contact" class="section">
+
+<h2>
+Contact Us
+</h2>
+
+<p id="contactText">
+
+Phone: +1 555 123 4567
+
+<br><br>
+
+Email:
+info@grandstayhotel.com
+
+<br><br>
+
+Address:
+123 Main Street, City Center
+
+</p>
+
+<br>
+
+<input
+type="text"
+id="contactName"
+placeholder="Your Name"
+>
+
+<input
+type="email"
+id="contactEmail"
+placeholder="Your Email"
+>
+
+<textarea
+id="contactMessage"
+placeholder="Your Message">
+</textarea>
+
+<button onclick="sendMessage()">
+Send Message
+</button>
+
+<div
+id="contactResult"
+class="message">
+</div>
+
+</div>
+
+
+<!-- FAQ -->
+
+<div id="faq" class="section">
+
+<h2>
+Customer Service Q&A
+</h2>
+
+<p id="faqText">
+
+<b>
+Q: How can I cancel my booking?
+</b>
+
+<br>
+
+You can cancel your booking
+up to 3 days before arrival.
+
+<br><br>
+
+<b>
+Q: Can I modify my booking?
+</b>
+
+<br>
+
+Yes. You can modify your booking
+up to 3 days before arrival.
+
+<br><br>
+
+<b>
+Q: How can I check availability?
+</b>
+
+<br>
+
+Use the availability search option
+before booking.
+
+</p>
+
+</div>
+
+
+<!-- TRAVEL GUIDE -->
+
+<div id="travel" class="section">
+
+<h2>
+Local Travel Guide
+</h2>
+
+<p id="travelText">
+
+GrandStay Hotel is located near
+popular tourist attractions,
+shopping centers, restaurants
+and public transportation.
+
+</p>
+
+</div>
+
+
+<!-- PRIVACY -->
+
+<div id="privacy" class="section">
+
+<h2>
+Privacy Policy
+</h2>
+
+<p id="privacyText">
+
+GrandStay Hotel respects user privacy.
+Personal information collected during
+registration and booking is used only
+for providing hotel services.
+
+</p>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<p>
+© 2026 GrandStay Hotel
+</p>
+
+<p>
+Online Hotel Booking System
+</p>
+
+</footer>
+
+
+<script>
+
+/* ===================================
+   DATA
+=================================== */
+
+let rooms =
+JSON.parse(
+localStorage.getItem("hotelRooms")
+) || [
+
+{
+id: 1,
+type: "Single Room",
+quantity: 10,
+price: 80,
+amenities: "1 Bed, Wi-Fi, TV"
+},
+
+{
+id: 2,
+type: "Double Room",
+quantity: 8,
+price: 120,
+amenities: "2 Beds, Wi-Fi, TV"
+},
+
+{
+id: 3,
+type: "Deluxe Room",
+quantity: 5,
+price: 180,
+amenities: "King Bed, Wi-Fi, TV, Breakfast"
+},
+
+{
+id: 4,
+type: "Suite",
+quantity: 3,
+price: 250,
+amenities: "Luxury Bed, Living Room, Breakfast"
+}
+
+];
+
+
+let users =
+JSON.parse(
+localStorage.getItem("hotelUsers")
+) || [];
+
+
+let bookings =
+JSON.parse(
+localStorage.getItem("hotelBookings")
+) || [];
+
+
+let currentUser = null;
+
+let selectedRoom = null;
+
+
+/* ===================================
+   NAVIGATION
+=================================== */
+
+function showSection(id) {
+
+document
+.querySelectorAll(".section")
+.forEach(
+section =>
+section.classList.remove("active")
+);
+
+document
+.getElementById(id)
+.classList.add("active");
+
+
+if(id === "rooms") {
+
+displayRooms();
+
+}
+
+
+if(id === "bookings") {
+
+displayUserBookings();
+
+}
+
+
+if(id === "profile") {
+
+displayProfile();
+
+}
+
+}
+
+
+/* ===================================
+   DISPLAY ROOMS
+=================================== */
+
+function displayRooms() {
+
+let list =
+document.getElementById(
+"roomList"
+);
+
+list.innerHTML = "";
+
+
+rooms.forEach(room => {
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>
+${room.type}
+</h3>
+
+<p>
+Price:
+$${room.price}
+per night
+</p>
+
+<p>
+Rooms:
+${room.quantity}
+</p>
+
+<p>
+Amenities:
+${room.amenities}
+</p>
+
+<button
+onclick="openBooking(${room.id})">
+
+Book Now
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* ===================================
+   USER REGISTRATION
+=================================== */
+
+function registerUser() {
+
+let name =
+document.getElementById(
+"registerName"
+).value;
+
+let email =
+document.getElementById(
+"registerEmail"
+).value;
+
+let password =
+document.getElementById(
+"registerPassword"
+).value;
+
+
+if(
+!name ||
+!email ||
+!password
+) {
+
+alert(
+"Please fill all fields."
+);
+
+return;
+
+}
+
+
+if(
+users.some(
+user =>
+user.email === email
+)
+) {
+
+alert(
+"Email already registered."
+);
+
+return;
+
+}
+
+
+users.push({
+
+name,
+email,
+password
+
+});
+
+
+localStorage.setItem(
+"hotelUsers",
+JSON.stringify(users)
+);
+
+
+document.getElementById(
+"registerMessage"
+).innerText =
+"Registration successful!";
+
+
+}
+
+
+/* ===================================
+   USER LOGIN
+=================================== */
+
+function userLogin() {
+
+let email =
+document.getElementById(
+"loginEmail"
+).value;
+
+let password =
+document.getElementById(
+"loginPassword"
+).value;
+
+
+let user =
+users.find(
+
+u =>
+u.email === email &&
+u.password === password
+
+);
+
+
+if(!user) {
+
+document.getElementById(
+"loginMessage"
+).innerText =
+"Invalid email or password.";
+
+return;
+
+}
+
+
+currentUser = user;
+
+
+document.getElementById(
+"loginMessage"
+).innerText =
+"Login successful!";
+
+
+}
+
+
+/* ===================================
+   PROFILE
+=================================== */
+
+function displayProfile() {
+
+let content =
+document.getElementById(
+"profileContent"
+);
+
+
+if(!currentUser) {
+
+content.innerHTML =
+"Please login first.";
+
+return;
+
+}
+
+
+content.innerHTML = `
+
+<p>
+<b>Name:</b>
+${currentUser.name}
+</p>
+
+<p>
+<b>Email:</b>
+${currentUser.email}
+</p>
+
+<br>
+
+<input
+id="newProfileName"
+value="${currentUser.name}"
+>
+
+<input
+id="newProfileEmail"
+value="${currentUser.email}"
+>
+
+<button onclick="updateProfile()">
+Update Profile
+</button>
+
+`;
+
+}
+
+
+function updateProfile() {
+
+if(!currentUser) {
+
+alert(
+"Please login first."
+);
+
+return;
+
+}
+
+
+let newName =
+document.getElementById(
+"newProfileName"
+).value;
+
+let newEmail =
+document.getElementById(
+"newProfileEmail"
+).value;
+
+
+currentUser.name =
+newName;
+
+currentUser.email =
+newEmail;
+
+
+let index =
+users.findIndex(
+u =>
+u.email ===
+currentUser.email
+);
+
+
+users[index] =
+currentUser;
+
+
+localStorage.setItem(
+"hotelUsers",
+JSON.stringify(users)
+);
+
+
+alert(
+"Profile updated successfully."
+);
+
+
+displayProfile();
+
+}
+
+
+/* ===================================
+   SEARCH ROOMS
+=================================== */
+
+function searchAvailableRooms() {
+
+let checkIn =
+document.getElementById(
+"searchCheckIn"
+).value;
+
+let checkOut =
+document.getElementById(
+"searchCheckOut"
+).value;
+
+
+if(!checkIn || !checkOut) {
+
+alert(
+"Select check-in and check-out dates."
+);
+
+return;
+
+}
+
+
+let result =
+document.getElementById(
+"searchResults"
+);
+
+
+result.innerHTML = "";
+
+
+rooms.forEach(room => {
+
+let booked =
+getBookedRooms(
+room.id,
+checkIn,
+checkOut
+);
+
+
+let available =
+room.quantity -
+booked;
+
+
+if(available > 0) {
+
+result.innerHTML += `
+
+<div class="card">
+
+<h3>
+${room.type}
+</h3>
+
+<p>
+Price:
+$${room.price}
+per night
+</p>
+
+<p>
+Available:
+${available}
+</p>
+
+<p>
+${room.amenities}
+</p>
+
+<button
+onclick="openBooking(${room.id})">
+
+Book Now
+
+</button>
+
+</div>
+
+`;
+
+}
+
+});
+
+}
+
+
+/* ===================================
+   CHECK AVAILABILITY
+=================================== */
+
+function checkAvailability() {
+
+let checkIn =
+document.getElementById(
+"availabilityCheckIn"
+).value;
+
+let checkOut =
+document.getElementById(
+"availabilityCheckOut"
+).value;
+
+
+if(!checkIn || !checkOut) {
+
+alert(
+"Please select dates."
+);
+
+return;
+
+}
+
+
+let result =
+document.getElementById(
+"availabilityResult"
+);
+
+
+result.innerHTML = "";
+
+
+rooms.forEach(room => {
+
+let booked =
+getBookedRooms(
+room.id,
+checkIn,
+checkOut
+);
+
+
+let available =
+room.quantity -
+booked;
+
+
+result.innerHTML += `
+
+<div class="card">
+
+<h3>
+${room.type}
+</h3>
+
+<p>
+Price:
+$${room.price}
+per night
+</p>
+
+<p>
+Available:
+${available}
+</p>
+
+<button
+onclick="openBooking(${room.id})">
+
+Book Now
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* ===================================
+   COUNT BOOKED ROOMS
+=================================== */
+
+function getBookedRooms(
+roomId,
+checkIn,
+checkOut
+) {
+
+return bookings.filter(
+
+booking =>
+
+booking.roomId === roomId &&
+
+booking.status ===
+"Confirmed" &&
+
+booking.checkIn <
+checkOut &&
+
+booking.checkOut >
+checkIn
+
+).length;
+
+}
+
+
+/* ===================================
+   OPEN BOOKING
+=================================== */
+
+function openBooking(roomId) {
+
+if(!currentUser) {
+
+alert(
+"Please login before booking."
+);
+
+showSection("login");
+
+return;
+
+}
+
+
+selectedRoom =
+rooms.find(
+room =>
+room.id === roomId
+);
+
+
+document.getElementById(
+"selectedRoom"
+).innerText =
+"Selected Room: " +
+selectedRoom.type;
+
+
+showSection(
+"bookingForm"
+);
+
+}
+
+
+/* ===================================
+   CONFIRM BOOKING
+=================================== */
+
+function confirmBooking() {
+
+if(!currentUser) {
+
+alert(
+"Please login first."
+);
+
+return;
+
+}
+
+
+let checkIn =
+document.getElementById(
+"bookingCheckIn"
+).value;
+
+let checkOut =
+document.getElementById(
+"bookingCheckOut"
+).value;
+
+let guests =
+document.getElementById(
+"bookingGuests"
+).value;
+
+let guestName =
+document.getElementById(
+"guestName"
+).value;
+
+let guestPhone =
+document.getElementById(
+"guestPhone"
+).value;
+
+
+if(
+!checkIn ||
+!checkOut ||
+!guests ||
+!guestName ||
+!guestPhone
+) {
+
+alert(
+"Please fill all booking details."
+);
+
+return;
+
+}
+
+
+let booked =
+getBookedRooms(
+selectedRoom.id,
+checkIn,
+checkOut
+);
+
+
+if(
+booked >=
+selectedRoom.quantity
+) {
+
+alert(
+"Room is not available."
+);
+
+return;
+
+}
+
+
+let booking = {
+
+id: Date.now(),
+
+userEmail:
+currentUser.email,
+
+roomId:
+selectedRoom.id,
+
+roomType:
+selectedRoom.type,
+
+checkIn,
+
+checkOut,
+
+guests,
+
+guestName,
+
+guestPhone,
+
+status:
+"Confirmed"
+
+};
+
+
+bookings.push(
+booking
+);
+
+
+localStorage.setItem(
+"hotelBookings",
+JSON.stringify(bookings)
+);
+
+
+document.getElementById(
+"bookingMessage"
+).innerText =
+"Booking confirmed successfully!";
+
+
+}
+
+
+/* ===================================
+   USER BOOKING HISTORY
+=================================== */
+
+function displayUserBookings() {
+
+let list =
+document.getElementById(
+"userBookings"
+);
+
+
+if(!currentUser) {
+
+list.innerHTML =
+"Please login first.";
+
+return;
+
+}
+
+
+let userBookings =
+bookings.filter(
+
+booking =>
+booking.userEmail ===
+currentUser.email
+
+);
+
+
+if(
+userBookings.length === 0
+) {
+
+list.innerHTML =
+"No bookings found.";
+
+return;
+
+}
+
+
+list.innerHTML = "";
+
+
+userBookings.forEach(
+booking => {
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>
+${booking.roomType}
+</h3>
+
+<p>
+Check-in:
+${booking.checkIn}
+</p>
+
+<p>
+Check-out:
+${booking.checkOut}
+</p>
+
+<p>
+Guests:
+${booking.guests}
+</p>
+
+<p>
+Status:
+${booking.status}
+</p>
+
+<button
+onclick="modifyBooking(${booking.id})">
+
+Modify
+
+</button>
+
+<button
+class="danger"
+onclick="cancelBooking(${booking.id})">
+
+Cancel
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* ===================================
+   THREE DAY RULE
+=================================== */
+
+function canModifyBooking(
+checkIn
+) {
+
+let arrival =
+new Date(checkIn);
+
+let today =
+new Date();
+
+
+let difference =
+arrival -
+today;
+
+
+let days =
+difference /
+(1000 * 60 * 60 * 24);
+
+
+return days >= 3;
+
+}
+
+
+/* ===================================
+   MODIFY BOOKING
+=================================== */
+
+function modifyBooking(id) {
+
+let booking =
+bookings.find(
+b =>
+b.id === id
+);
+
+
+if(
+!canModifyBooking(
+booking.checkIn
+)
+) {
+
+alert(
+"Booking can only be modified 3 days before arrival."
+);
+
+return;
+
+}
+
+
+let newCheckIn =
+prompt(
+"Enter new check-in date:",
+booking.checkIn
+);
+
+
+let newCheckOut =
+prompt(
+"Enter new check-out date:",
+booking.checkOut
+);
+
+
+if(
+newCheckIn &&
+newCheckOut
+) {
+
+booking.checkIn =
+newCheckIn;
+
+booking.checkOut =
+newCheckOut;
+
+
+localStorage.setItem(
+"hotelBookings",
+JSON.stringify(bookings)
+);
+
+
+displayUserBookings();
+
+}
+
+}
+
+
+/* ===================================
+   CANCEL BOOKING
+=================================== */
+
+function cancelBooking(id) {
+
+let booking =
+bookings.find(
+b =>
+b.id === id
+);
+
+
+if(
+!canModifyBooking(
+booking.checkIn
+)
+) {
+
+alert(
+"Booking can only be cancelled 3 days before arrival."
+);
+
+return;
+
+}
+
+
+booking.status =
+"Cancelled";
+
+
+localStorage.setItem(
+"hotelBookings",
+JSON.stringify(bookings)
+);
+
+
+displayUserBookings();
+
+}
+
+
+/* ===================================
+   ADMIN LOGIN
+=================================== */
+
+function adminLogin() {
+
+let username =
+document.getElementById(
+"adminUsername"
+).value;
+
+let password =
+document.getElementById(
+"adminPassword"
+).value;
+
+
+if(
+username === "admin" &&
+password === "admin123"
+) {
+
+document.getElementById(
+"adminLoginMessage"
+).innerText =
+"Admin login successful.";
+
+
+showSection(
+"adminDashboard"
+);
+
+
+displayAdminRooms();
+
+displayAdminBookings();
+
+}
+
+else {
+
+document.getElementById(
+"adminLoginMessage"
+).innerText =
+"Invalid admin login.";
+
+}
+
+}
+
+
+/* ===================================
+   ADMIN ROOM MANAGEMENT
+=================================== */
+
+function displayAdminRooms() {
+
+let list =
+document.getElementById(
+"adminRoomList"
+);
+
+
+list.innerHTML = "";
+
+
+rooms.forEach(
+(room,index) => {
+
+list.innerHTML += `
+
+<tr>
+
+<td>
+${room.type}
+</td>
+
+<td>
+
+<input
+type="number"
+id="quantity${index}"
+value="${room.quantity}"
+>
+
+</td>
+
+<td>
+
+<input
+type="number"
+id="price${index}"
+value="${room.price}"
+>
+
+</td>
+
+<td>
+
+<button
+onclick="updateRoom(${index})">
+
+Update
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+
+function updateRoom(index) {
+
+rooms[index].quantity =
+Number(
+document.getElementById(
+"quantity" + index
+).value
+);
+
+
+rooms[index].price =
+Number(
+document.getElementById(
+"price" + index
+).value
+);
+
+
+localStorage.setItem(
+"hotelRooms",
+JSON.stringify(rooms)
+);
+
+
+alert(
+"Room details updated."
+);
+
+
+displayAdminRooms();
+
+displayRooms();
+
+}
+
+
+/* ===================================
+   ADMIN BOOKING MANAGEMENT
+=================================== */
+
+function displayAdminBookings() {
+
+let list =
+document.getElementById(
+"adminBookings"
+);
+
+
+list.innerHTML = `
+
+<table>
+
+<tr>
+
+<th>
+ID
+</th>
+
+<th>
+User
+</th>
+
+<th>
+Room
+</th>
+
+<th>
+Check-in
+</th>
+
+<th>
+Check-out
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+${
+
+bookings.map(
+
+booking => `
+
+<tr>
+
+<td>
+${booking.id}
+</td>
+
+<td>
+${booking.userEmail}
+</td>
+
+<td>
+${booking.roomType}
+</td>
+
+<td>
+${booking.checkIn}
+</td>
+
+<td>
+${booking.checkOut}
+</td>
+
+<td>
+${booking.status}
+</td>
+
+<td>
+
+<button
+onclick="adminModifyBooking(${booking.id})">
+
+Modify
+
+</button>
+
+<button
+class="danger"
+onclick="adminCancelBooking(${booking.id})">
+
+Cancel
+
+</button>
+
+</td>
+
+</tr>
+
+`
+
+).join("")
+
+}
+
+</table>
+
+`;
+
+}
+
+
+/* ===================================
+   ADMIN MODIFY BOOKING
+=================================== */
+
+function adminModifyBooking(id) {
+
+let booking =
+bookings.find(
+b =>
+b.id === id
+);
+
+
+let newCheckIn =
+prompt(
+"New check-in:",
+booking.checkIn
+);
+
+
+let newCheckOut =
+prompt(
+"New check-out:",
+booking.checkOut
+);
+
+
+if(
+newCheckIn &&
+newCheckOut
+) {
+
+booking.checkIn =
+newCheckIn;
+
+booking.checkOut =
+newCheckOut;
+
+
+localStorage.setItem(
+"hotelBookings",
+JSON.stringify(bookings)
+);
+
+
+displayAdminBookings();
+
+}
+
+}
+
+
+/* ===================================
+   ADMIN CANCEL BOOKING
+=================================== */
+
+function adminCancelBooking(id) {
+
+let booking =
+bookings.find(
+b =>
+b.id === id
+);
+
+
+booking.status =
+"Cancelled";
+
+
+localStorage.setItem(
+"hotelBookings",
+JSON.stringify(bookings)
+);
+
+
+displayAdminBookings();
+
+}
+
+
+/* ===================================
+   STATIC CONTENT UPDATE
+=================================== */
+
+function updateContent() {
+
+let type =
+document.getElementById(
+"contentType"
+).value;
+
+let text =
+document.getElementById(
+"contentText"
+).value;
+
+
+if(!text) {
+
+alert(
+"Enter content first."
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+"static_" + type,
+text
+);
+
+
+let element =
+document.getElementById(
+type + "Text"
+);
+
+
+if(element) {
+
+element.innerText =
+text;
+
+}
+
+
+alert(
+"Content updated successfully."
+);
+
+}
+
+
+/* ===================================
+   CONTACT FORM
+=================================== */
+
+function sendMessage() {
+
+let name =
+document.getElementById(
+"contactName"
+).value;
+
+let email =
+document.getElementById(
+"contactEmail"
+).value;
+
+let message =
+document.getElementById(
+"contactMessage"
+).value;
+
+
+if(
+!name ||
+!email ||
+!message
+) {
+
+alert(
+"Please fill all fields."
+);
+
+return;
+
+}
+
+
+document.getElementById(
+"contactResult"
+).innerText =
+"Thank you! Your message has been sent.";
+
+}
+
+
+/* ===================================
+   LOAD SAVED CONTENT
+=================================== */
+
+function loadContent() {
+
+[
+"about",
+"contact",
+"faq",
+"travel",
+"privacy"
+
+].forEach(
+type => {
+
+let saved =
+localStorage.getItem(
+"static_" + type
+);
+
+
+if(saved) {
+
+let element =
+document.getElementById(
+type + "Text"
+);
+
+
+if(element) {
+
+element.innerText =
+saved;
+
+}
+
+}
+
+});
+
+}
+
+
+/* ===================================
+   INITIALIZE
+=================================== */
+
+displayRooms();
+
+loadContent();
+
+</script>
+
+</body>
+</html>
+```
