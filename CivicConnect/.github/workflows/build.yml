@@ -1,0 +1,36 @@
+name: CivicConnect CI Build & Test
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    name: Build & Run Automated Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build Web Application Package (WAR)
+      run: mvn clean package -B
+
+    - name: Run JUnit Test Suite
+      run: mvn test -B
+
+    - name: Verify Web Assets & XML/XSD Artifacts
+      run: |
+        test -f src/main/webapp/WEB-INF/xml/complaint.xsd
+        test -f src/main/webapp/WEB-INF/xml/complaint-report.xslt
+        test -f src/main/webapp/WEB-INF/wsdl/DepartmentAllocationService.wsdl
+        echo "All mandatory XML, XSD, XSLT, and WSDL artifacts verified successfully."
