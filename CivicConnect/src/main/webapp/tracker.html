@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Complaint Tracker - CivicConnect</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">🏛️ CivicConnect</a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="complaint.html" class="nav-link">Report Issue</a></li>
+          <li><a href="tracker.html" class="nav-link active">Track Status</a></li>
+          <li><a href="history.html" class="nav-link">My History</a></li>
+          <li><a href="admin" class="nav-link">Admin Portal</a></li>
+          <li><button type="button" class="dark-toggle-btn" id="dark-mode-toggle">🌙 Dark Mode</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- Real-Time Search Bar -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1rem;">🔍 Real-Time Complaint Status Search</h2>
+      <div style="display: flex; gap: 0.75rem;">
+        <input type="text" id="status-search-input" class="form-control" placeholder="Enter Complaint ID (e.g., CMP1001, CMP1002)...">
+        <button type="button" id="status-search-btn" class="btn btn-primary" style="white-space: nowrap;">Check Status</button>
+      </div>
+      <div id="status-search-result" style="margin-top: 1rem; display: none;"></div>
+    </div>
+
+    <!-- Active Complaints Table -->
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <div>
+          <h2 style="font-size: 1.35rem; font-weight: 700;">Live Complaint Feed &amp; Department SLA Tracker</h2>
+          <p style="color: var(--text-secondary); font-size: 0.85rem;">Automatically updated via DOM APIs as new complaints are submitted</p>
+        </div>
+        <a href="complaint.html" class="btn btn-secondary" style="font-size: 0.85rem;">+ New Complaint</a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Complaint ID</th>
+              <th>Category</th>
+              <th>Location</th>
+              <th>Allocated Department (SOAP)</th>
+              <th>Resolution SLA</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tracker-tbody">
+            <!-- Dynamically populated via Servlet GET AJAX / JS DOM Insertion -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container" style="margin: 0 auto;">
+      <p>&copy; 2026 CivicConnect Platform</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Fetch initial list on load
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await fetch('api/complaints/list');
+        const data = await res.json();
+        if (res.ok && data.success && data.complaints) {
+          const tbody = document.getElementById('tracker-tbody');
+          tbody.innerHTML = '';
+          data.complaints.forEach(c => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><strong>${c.complaintId}</strong></td>
+              <td><span class="tag">${c.category}</span></td>
+              <td>${c.location}</td>
+              <td>${c.department}</td>
+              <td><span class="badge sla-badge">${c.sla}</span></td>
+              <td><span class="badge status-badge ${c.status.toLowerCase()}">${c.status}</span></td>
+              <td><button class="btn btn-outline" style="padding: 0.2rem 0.5rem; font-size: 0.8rem;" onclick="alert('Complaint #${c.complaintId}: ${c.description}')">Details</button></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      } catch (err) {
+        console.error('Tracker load error:', err);
+      }
+    });
+  </script>
+</body>
+</html>

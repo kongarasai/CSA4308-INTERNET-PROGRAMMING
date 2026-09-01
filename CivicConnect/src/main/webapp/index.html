@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CivicConnect: Transparent Municipal Civic-Issue Reporting & Resolution Platform (SDG 9 & SDG 11)">
+  <title>CivicConnect - Municipal Grievance Redressal Platform</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" id="logo-link">
+        🏛️ CivicConnect <span class="badge-city">SDG 9 &amp; 11</span>
+      </a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="complaint.html" class="nav-link">Report Issue</a></li>
+          <li><a href="tracker.html" class="nav-link">Track Status</a></li>
+          <li><a href="history.html" class="nav-link">My History</a></li>
+          <li><a href="admin" class="nav-link">Admin Portal</a></li>
+          <li><a href="login.html" class="btn btn-outline" id="nav-login-btn">Login</a></li>
+          <li><button type="button" class="dark-toggle-btn" id="dark-mode-toggle">🌙 Dark Mode</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container">
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1 class="hero-title">Empowering Citizens for a Smarter, Safer City</h1>
+      <p class="hero-subtitle">
+        CivicConnect replaces slow paper processes with instant transparent grievance redressal. Report potholes, garbage overflow, broken streetlights, or water leaks with automatic SOAP-based municipal department routing.
+      </p>
+      <div class="hero-cta">
+        <a href="complaint.html" class="btn btn-primary" id="hero-submit-btn">📝 Submit a Complaint</a>
+        <a href="tracker.html" class="btn btn-outline" style="color: #fff; border-color: #fff;" id="hero-track-btn">🔍 Track Resolution Status</a>
+      </div>
+    </section>
+
+    <!-- Municipal Categories Section -->
+    <section style="margin-bottom: 3rem;">
+      <h2 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center;">Supported Municipal Issue Categories</h2>
+      
+      <div class="grid-4">
+        <!-- Category 1: Potholes -->
+        <article class="card">
+          <div class="card-title">🛣️ Roads & Potholes</div>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+            Report hazardous road cracks, missing manhole covers, and deep potholes impacting commuter safety.
+          </p>
+          <span class="tag">Auto-routed to Roads Dept</span>
+          <span class="badge sla-badge" style="margin-left: 0.5rem; background-color: #f59e0b; color: #fff;">SLA: 24h</span>
+        </article>
+
+        <!-- Category 2: Sanitation -->
+        <article class="card">
+          <div class="card-title">🧹 Sanitation & Trash</div>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+            Report overflowing community garbage dumpsters, uncollected waste, or illegal dumping sites.
+          </p>
+          <span class="tag">Auto-routed to Sanitation</span>
+          <span class="badge sla-badge" style="margin-left: 0.5rem; background-color: #f59e0b; color: #fff;">SLA: 12h</span>
+        </article>
+
+        <!-- Category 3: Streetlights -->
+        <article class="card">
+          <div class="card-title">💡 Street Lighting</div>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+            Report dark streets, non-functional lighting fixtures, or dangerous exposed electrical wires.
+          </p>
+          <span class="tag">Auto-routed to Electricity</span>
+          <span class="badge sla-badge" style="margin-left: 0.5rem; background-color: #f59e0b; color: #fff;">SLA: 36h</span>
+        </article>
+
+        <!-- Category 4: Water Leakage -->
+        <article class="card">
+          <div class="card-title">🚰 Water & Sewerage</div>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
+            Report high pressure main supply pipe bursts, sewage blockage, or contaminated drinking water.
+          </p>
+          <span class="tag">Auto-routed to Water Board</span>
+          <span class="badge sla-badge" style="margin-left: 0.5rem; background-color: #ef4444; color: #fff;">SLA: 18h</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- Platform Highlights Section -->
+    <section class="grid-2" style="margin-bottom: 3rem;">
+      <div class="card">
+        <h3 class="card-title">⚙️ SOA Architecture &amp; SOAP Integration</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+          CivicConnect integrates a JAX-WS SOAP Web Service (<code>DepartmentAllocationService</code>) described by WSDL contract to handle rule-based real-time department routing based on complaint categories.
+        </p>
+        <ul style="padding-left: 1.2rem; color: var(--text-secondary); font-size: 0.9rem;">
+          <li>Automated SLA estimation &amp; priority assignment</li>
+          <li>XSD XML Schema validation for structured payload integrity</li>
+          <li>XSLT XML transformation for departmental reporting</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">🌱 Sustainability Goals (SDG 9 &amp; 11)</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+          Directly supporting Sustainable Development Goals by establishing resilient infrastructure and inclusive, safe, sustainable urban civic services.
+        </p>
+        <ul style="padding-left: 1.2rem; color: var(--text-secondary); font-size: 0.9rem;">
+          <li><strong>SDG 9:</strong> Tech-driven public infrastructure modernization</li>
+          <li><strong>SDG 11:</strong> Cleaner, safer, and responsive urban communities</li>
+          <li>Accessible semantic HTML &amp; light-weight mobile responsive CSS</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container" style="margin: 0 auto;">
+      <p>&copy; 2026 CivicConnect Platform | Municipal Corporation Civic Issue Redressal System</p>
+      <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+        CSA4308 Internet Programming Final Project | HTML5 • CSS3 • JS • Servlets • JSP • XML/XSD/XSLT • SOAP
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

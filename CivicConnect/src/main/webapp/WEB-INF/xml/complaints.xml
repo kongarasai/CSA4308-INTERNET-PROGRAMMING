@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  CivicConnect Collection XML Instance Document
+-->
+<complaints xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <complaint>
+        <complaintId>CMP1001</complaintId>
+        <citizenId>C101</citizenId>
+        <citizenName>Rajesh Kumar</citizenName>
+        <category>POTHOLE</category>
+        <description>Deep dangerous pothole near Central Bus Terminal junction causing traffic bottleneck.</description>
+        <location>MG Road Junction, Ward 12</location>
+        <pincode>560001</pincode>
+        <timestamp>2026-08-30T10:30:00</timestamp>
+        <status>ASSIGNED</status>
+        <department>Roads &amp; Infrastructure</department>
+        <sla>24 Hours</sla>
+        <priority>HIGH</priority>
+    </complaint>
+    <complaint>
+        <complaintId>CMP1002</complaintId>
+        <citizenId>C101</citizenId>
+        <citizenName>Rajesh Kumar</citizenName>
+        <category>GARBAGE_OVERFLOW</category>
+        <description>Overflowing community garbage bin spilling onto pedestrian footpath.</description>
+        <location>Market Road, Ward 4</location>
+        <pincode>560002</pincode>
+        <timestamp>2026-08-31T14:15:00</timestamp>
+        <status>SUBMITTED</status>
+        <department>Sanitation &amp; Waste Management</department>
+        <sla>12 Hours</sla>
+        <priority>HIGH</priority>
+    </complaint>
+    <complaint>
+        <complaintId>CMP1003</complaintId>
+        <citizenId>C101</citizenId>
+        <citizenName>Rajesh Kumar</citizenName>
+        <category>BROKEN_STREETLIGHT</category>
+        <description>Five consecutive streetlights non-functional creating safety hazard at night.</description>
+        <location>7th Cross Indiranagar</location>
+        <pincode>560038</pincode>
+        <timestamp>2026-09-01T08:00:00</timestamp>
+        <status>IN_PROGRESS</status>
+        <department>Electricity &amp; Street Lighting</department>
+        <sla>36 Hours</sla>
+        <priority>MEDIUM</priority>
+    </complaint>
+    <complaint>
+        <complaintId>CMP1004</complaintId>
+        <citizenId>C101</citizenId>
+        <citizenName>Rajesh Kumar</citizenName>
+        <category>WATER_LEAKAGE</category>
+        <description>High pressure main water supply pipeline leaking heavily, flooding street.</description>
+        <location>4th Block Koramangala</location>
+        <pincode>560034</pincode>
+        <timestamp>2026-09-01T15:20:00</timestamp>
+        <status>SUBMITTED</status>
+        <department>Water Supply &amp; Sewerage Board</department>
+        <sla>18 Hours</sla>
+        <priority>CRITICAL</priority>
+    </complaint>
+</complaints>

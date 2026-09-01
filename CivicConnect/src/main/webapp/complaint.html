@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Civic Complaint - CivicConnect</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">🏛️ CivicConnect</a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="complaint.html" class="nav-link active">Report Issue</a></li>
+          <li><a href="tracker.html" class="nav-link">Track Status</a></li>
+          <li><a href="history.html" class="nav-link">My History</a></li>
+          <li><a href="admin" class="nav-link">Admin Portal</a></li>
+          <li><button type="button" class="dark-toggle-btn" id="dark-mode-toggle">🌙 Dark Mode</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 720px; margin-top: 2rem;">
+    
+    <div class="card">
+      <h1 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem; text-align: center;">Submit Municipal Civic Issue</h1>
+      <p style="color: var(--text-secondary); text-align: center; margin-bottom: 1.5rem; font-size: 0.95rem;">
+        Fill in issue details below. Your complaint will be validated against XSD XML Schema and automatically routed to the responsible municipal department via our JAX-WS SOAP service.
+      </p>
+
+      <!-- Alert for AJAX Submission Responses -->
+      <div id="form-response-alert" class="alert" style="display: none;"></div>
+
+      <form id="complaint-form" novalidate>
+        
+        <!-- Category Selection -->
+        <div class="form-group" id="category-group">
+          <label for="category" class="form-label">Issue Category *</label>
+          <select id="category" name="category" class="form-control" required>
+            <option value="">-- Select Municipal Category --</option>
+            <option value="POTHOLE">🛣️ Potholes & Road Damage (Roads Dept)</option>
+            <option value="GARBAGE_OVERFLOW">🧹 Garbage Overflow & Trash (Sanitation Dept)</option>
+            <option value="BROKEN_STREETLIGHT">💡 Broken Streetlight & Darkness (Electricity Dept)</option>
+            <option value="WATER_LEAKAGE">🚰 Main Water Supply Leakage (Water Board)</option>
+          </select>
+          <span class="error-text">Please select a valid category.</span>
+        </div>
+
+        <!-- Issue Location -->
+        <div class="form-group" id="location-group">
+          <label for="location" class="form-label">Location / Street Address / Landmark *</label>
+          <input type="text" id="location" name="location" class="form-control" placeholder="e.g., MG Road Junction, Near Metro Pillar 42" required>
+          <span class="error-text">Location is required.</span>
+        </div>
+
+        <!-- PIN Code (Regex Validated) -->
+        <div class="form-group" id="pincode-group">
+          <label for="pincode" class="form-label">Municipal PIN Code (6 Digits Regex) *</label>
+          <input type="text" id="pincode" name="pincode" class="form-control" placeholder="e.g., 560001" maxlength="6" required>
+          <span class="error-text">Must be a valid 6-digit Indian PIN code.</span>
+        </div>
+
+        <!-- Mobile Number (Regex Validated) -->
+        <div class="form-group" id="mobile-group">
+          <label for="mobile" class="form-label">Citizen Mobile Number (10 Digits Regex) *</label>
+          <input type="tel" id="mobile" name="mobile" class="form-control" placeholder="e.g., 9876543210" maxlength="10" value="9876543210" required>
+          <span class="error-text">Must be 10 digits starting with 6, 7, 8, or 9.</span>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group" id="description-group">
+          <label for="description" class="form-label">Detailed Problem Description *</label>
+          <textarea id="description" name="description" class="form-control" rows="4" placeholder="Describe the severity, exact location, and hazards caused by this issue..." required></textarea>
+          <span class="error-text">Description must be at least 5 characters long.</span>
+        </div>
+
+        <!-- Submission Buttons -->
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <button type="submit" id="submit-btn" class="btn btn-primary" style="flex: 1;">Submit Complaint</button>
+          <button type="reset" class="btn btn-outline">Reset Form</button>
+        </div>
+      </form>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container" style="margin: 0 auto;">
+      <p>&copy; 2026 CivicConnect Platform | Validated against XHTML/HTML5 standard</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Complaint History - CivicConnect</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">🏛️ CivicConnect</a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="complaint.html" class="nav-link">Report Issue</a></li>
+          <li><a href="tracker.html" class="nav-link">Track Status</a></li>
+          <li><a href="history.html" class="nav-link active">My History</a></li>
+          <li><a href="api/logout" class="btn btn-outline" style="color: #ef4444;">Logout</a></li>
+          <li><button type="button" class="dark-toggle-btn" id="dark-mode-toggle">🌙 Dark Mode</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <div>
+          <h1 style="font-size: 1.6rem; font-weight: 800;">Citizen Grievance Submission History</h1>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            Isolated view showing only complaints submitted by your authenticated account.
+          </p>
+        </div>
+        <span class="badge" style="background-color: var(--primary-color); color: #fff; padding: 0.5rem 1rem;" id="citizen-badge">Citizen ID: C101</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Submitted Date</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Location</th>
+              <th>Department</th>
+              <th>SLA</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody">
+            <!-- Dynamically populated via AJAX -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container" style="margin: 0 auto;">
+      <p>&copy; 2026 CivicConnect Platform</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await fetch('api/complaints/list');
+        const data = await res.json();
+        if (res.ok && data.success) {
+          const tbody = document.getElementById('history-tbody');
+          document.getElementById('citizen-badge').textContent = `Citizen ID: ${data.citizenId}`;
+          tbody.innerHTML = '';
+          if (data.complaints.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-secondary);">No complaints submitted yet.</td></tr>';
+            return;
+          }
+          data.complaints.forEach(c => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><strong>${c.complaintId}</strong></td>
+              <td>${c.timestamp ? c.timestamp.replace('T', ' ') : 'N/A'}</td>
+              <td><span class="tag">${c.category}</span></td>
+              <td style="max-width: 250px;">${c.description}</td>
+              <td>${c.location}</td>
+              <td>${c.department}</td>
+              <td><span class="badge sla-badge">${c.sla}</span></td>
+              <td><span class="badge status-badge ${c.status.toLowerCase()}">${c.status}</span></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      } catch (e) {
+        console.error('History load error:', e);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  CivicConnect Sample XML Instance Document
+  Validated against complaint.xsd
+-->
+<complaint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="complaint.xsd">
+    <complaintId>CMP1001</complaintId>
+    <citizenId>C101</citizenId>
+    <citizenName>Rajesh Kumar</citizenName>
+    <category>POTHOLE</category>
+    <description>Deep dangerous pothole near Central Bus Terminal junction causing traffic bottleneck.</description>
+    <location>MG Road Junction, Ward 12</location>
+    <pincode>560001</pincode>
+    <timestamp>2026-09-01T10:30:00</timestamp>
+    <status>ASSIGNED</status>
+    <department>Roads &amp; Infrastructure</department>
+    <sla>24 Hours</sla>
+    <priority>HIGH</priority>
+</complaint>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  CivicConnect XML Sitemap 
+  Defines the website's complete page hierarchy and navigation index.
+  Fulfills CO1 requirements.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- Citizen Home Page -->
+    <url>
+        <loc>http://localhost:8080/CivicConnect/index.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Complaint Submission Page -->
+    <url>
+        <loc>http://localhost:8080/CivicConnect/complaint.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Complaint Status Tracker Page -->
+    <url>
+        <loc>http://localhost:8080/CivicConnect/tracker.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- User Complaint History Page -->
+    <url>
+        <loc>http://localhost:8080/CivicConnect/history.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Authentication Pages -->
+    <url>
+        <loc>http://localhost:8080/CivicConnect/login.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>http://localhost:8080/CivicConnect/register.html</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Admin Dashboard & MVC JSP Page -->
+    <url>
+        <loc>http://localhost:8080/CivicConnect/admin-dashboard.jsp</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Department SOAP WSDL Endpoint -->
+    <url>
+        <loc>http://localhost:8080/CivicConnect/WEB-INF/wsdl/DepartmentAllocationService.wsdl</loc>
+        <lastmod>2026-09-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>

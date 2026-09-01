@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Login - CivicConnect</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo">🏛️ CivicConnect</a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="complaint.html" class="nav-link">Report Issue</a></li>
+          <li><a href="tracker.html" class="nav-link">Track Status</a></li>
+          <li><a href="register.html" class="btn btn-outline">Register</a></li>
+          <li><button type="button" class="dark-toggle-btn" id="dark-mode-toggle">🌙 Dark Mode</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 480px; margin-top: 3rem;">
+    <div class="card">
+      <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center;">Citizen & Admin Portal</h2>
+      <p style="color: var(--text-secondary); text-align: center; margin-bottom: 1.5rem; font-size: 0.9rem;">
+        Log in to track your reported civic issues or manage municipal routing.
+      </p>
+
+      <div id="login-alert" class="alert" style="display: none;"></div>
+
+      <form id="login-form" action="api/login" method="POST">
+        <div class="form-group" id="email-group">
+          <label for="email" class="form-label">Email Address *</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="e.g., rajesh@example.com" required>
+          <span class="error-text">Please enter a valid email address.</span>
+        </div>
+
+        <div class="form-group" id="password-group">
+          <label for="password" class="form-label">Password *</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+          <span class="error-text">Password is required.</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Login</button>
+      </form>
+
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); font-size: 0.85rem; text-align: center;">
+        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">Quick Demo Credentials:</p>
+        <code style="background-color: var(--border-color); padding: 0.2rem 0.4rem; border-radius: 4px;">Citizen: rajesh@example.com / password123</code><br>
+        <code style="background-color: var(--border-color); padding: 0.2rem 0.4rem; border-radius: 4px; display: inline-block; margin-top: 0.3rem;">Admin: admin@civicconnect.gov.in / admin123</code>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container" style="margin: 0 auto;">
+      <p>&copy; 2026 CivicConnect Platform</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new URLSearchParams(new FormData(form));
+
+      try {
+        const response = await fetch('api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formData.toString()
+        });
+
+        const data = await response.json();
+        const alert = document.getElementById('login-alert');
+
+        if (response.ok && data.success) {
+          alert.className = 'alert alert-success';
+          alert.textContent = 'Login successful! Redirecting...';
+          alert.style.display = 'block';
+          setTimeout(() => {
+            window.location.href = data.redirectUrl || 'tracker.html';
+          }, 1000);
+        } else {
+          alert.className = 'alert alert-error';
+          alert.textContent = data.message || 'Login failed.';
+          alert.style.display = 'block';
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+      }
+    });
+  </script>
+</body>
+</html>

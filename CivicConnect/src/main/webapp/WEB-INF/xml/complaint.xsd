@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <!-- Root Element Definition -->
+    <xs:element name="complaint" type="ComplaintType"/>
+
+    <xs:element name="complaints">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="complaint" type="ComplaintType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Complex Type Definition for Complaint -->
+    <xs:complexType name="ComplaintType">
+        <xs:sequence>
+            <xs:element name="complaintId" type="ComplaintIdType"/>
+            <xs:element name="citizenId" type="xs:string"/>
+            <xs:element name="citizenName" type="xs:string"/>
+            <xs:element name="category" type="CategoryType"/>
+            <xs:element name="description" type="DescriptionType"/>
+            <xs:element name="location" type="xs:string"/>
+            <xs:element name="pincode" type="PincodeType"/>
+            <xs:element name="timestamp" type="xs:string"/>
+            <xs:element name="status" type="StatusType"/>
+            <xs:element name="department" type="xs:string"/>
+            <xs:element name="sla" type="xs:string"/>
+            <xs:element name="priority" type="PriorityType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Complaint ID Format Restriction: CMP followed by 4 digits -->
+    <xs:simpleType name="ComplaintIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="CMP[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Category Enumeration Restriction -->
+    <xs:simpleType name="CategoryType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="POTHOLE"/>
+            <xs:enumeration value="GARBAGE_OVERFLOW"/>
+            <xs:enumeration value="BROKEN_STREETLIGHT"/>
+            <xs:enumeration value="WATER_LEAKAGE"/>
+            <xs:enumeration value="ROADS"/>
+            <xs:enumeration value="SANITATION"/>
+            <xs:enumeration value="ELECTRICITY"/>
+            <xs:enumeration value="WATER"/>
+            <xs:enumeration value="GENERAL"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Status Enumeration Restriction -->
+    <xs:simpleType name="StatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUBMITTED"/>
+            <xs:enumeration value="ASSIGNED"/>
+            <xs:enumeration value="IN_PROGRESS"/>
+            <xs:enumeration value="RESOLVED"/>
+            <xs:enumeration value="CLOSED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Priority Enumeration Restriction -->
+    <xs:simpleType name="PriorityType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LOW"/>
+            <xs:enumeration value="MEDIUM"/>
+            <xs:enumeration value="HIGH"/>
+            <xs:enumeration value="CRITICAL"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Pincode Format Restriction: 6 digits -->
+    <xs:simpleType name="PincodeType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Description Length Restriction -->
+    <xs:simpleType name="DescriptionType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="5"/>
+            <xs:maxLength value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+    name="DepartmentAllocationService"
+    targetNamespace="http://soap.civicconnect.com/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://soap.civicconnect.com/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+  <!-- 1. TYPES: XML Schema data type definitions -->
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://soap.civicconnect.com/">
+      <xsd:element name="allocateDepartment">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="category" type="xsd:string"/>
+            <xsd:element name="location" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="allocateDepartmentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="departmentAllocationResult" type="tns:DepartmentAllocationResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:complexType name="DepartmentAllocationResponse">
+        <xsd:sequence>
+          <xsd:element name="category" type="xsd:string"/>
+          <xsd:element name="location" type="xsd:string"/>
+          <xsd:element name="department" type="xsd:string"/>
+          <xsd:element name="slaHours" type="xsd:string"/>
+          <xsd:element name="priority" type="xsd:string"/>
+          <xsd:element name="status" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+
+  <!-- 2. MESSAGE: Input and output SOAP message parameters -->
+  <wsdl:message name="allocateDepartmentInput">
+    <wsdl:part name="parameters" element="tns:allocateDepartment"/>
+  </wsdl:message>
+  
+  <wsdl:message name="allocateDepartmentOutput">
+    <wsdl:part name="parameters" element="tns:allocateDepartmentResponse"/>
+  </wsdl:message>
+
+  <!-- 3. PORT TYPE: Interface defining operations -->
+  <wsdl:portType name="DepartmentAllocationPortType">
+    <wsdl:operation name="allocateDepartment">
+      <wsdl:input message="tns:allocateDepartmentInput"/>
+      <wsdl:output message="tns:allocateDepartmentOutput"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <!-- 4. BINDING: Protocol and data format specifications -->
+  <wsdl:binding name="DepartmentAllocationBinding" type="tns:DepartmentAllocationPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="allocateDepartment">
+      <soap:operation soapAction="http://soap.civicconnect.com/allocateDepartment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <!-- 5. SERVICE & PORT: Physical deployment endpoint address -->
+  <wsdl:service name="DepartmentAllocationService">
+    <wsdl:port name="DepartmentAllocationPort" binding="tns:DepartmentAllocationBinding">
+      <soap:address location="http://localhost:8080/CivicConnect/ws/departmentAllocation"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
